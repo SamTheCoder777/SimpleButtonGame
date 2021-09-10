@@ -30,9 +30,6 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         File file = new File("C:\\Users\\rowan\\IdeaProjects\\JavaFxLearning\\src\\main\\java\\com\\example\\javafxlearning\\WordList.txt");
         final RandomAccessFile f = new RandomAccessFile(file, "r");
-        final long randomLocation = (long) (Math.random() * f.length());
-        f.seek(randomLocation);
-        f.readLine();
 
 
 
@@ -42,19 +39,21 @@ public class HelloApplication extends Application {
         double maxY = screenBounds.getHeight() - 400.0;
         double maxX = screenBounds.getWidth() - 400.0;
         stage.setScene(scene);
-        //stage.initStyle(StageStyle.UNDECORATED);
-        //stage.setResizable(false);
+        stage.setResizable(false);
+        stage.setTitle("Simple Button Game");
         stage.show();
         btn.setLayoutX(450);
         btn.setLayoutY(300);
-        System.out.println(maxX);
 
 
         btn.setOnMousePressed(e-> {
             btn.disarm();
             double xRandom = Math.random() * (900.0);
             double yRandom = Math.random() * (500.0);
+
             try {
+                final long randomLocation = (long) (Math.random() * f.length());
+                f.seek(randomLocation);
                 randomLine = f.readLine();
             }
             catch(IOException c) {
@@ -85,10 +84,11 @@ public class HelloApplication extends Application {
         });
 
         scene.setOnMousePressed(e-> {
-            stage.setTitle("hi");
             double xRandom = Math.random() * (900.0);
             double yRandom = Math.random() * (500.0);
             try {
+                final long randomLocation = (long) (Math.random() * f.length());
+                f.seek(randomLocation);
                 randomLine = f.readLine();
             }
             catch(IOException c) {
